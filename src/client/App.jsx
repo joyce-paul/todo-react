@@ -11,6 +11,11 @@ class App extends React.Component {
     }
 
 
+clickHandler(){
+  console.log("clicking");
+}
+
+
 changeHandler(event){
   this.setState({word:event.target.value});
   console.log("change", event.target.value);
@@ -18,11 +23,11 @@ changeHandler(event){
 
 
   render() {
+    console.log("rendering");
     return (
-      <div>
-        <h4>Welcome</h4>
-
-       <input onChange={(event)=>{this.changeHandler(event);}}/>
+      <div className="item">
+         <input onChange={(event)=>{this.changeHandler(event);}}/>
+         <button onClick={()=>{this.clickHandler()}}>Add an item</button>
       </div>
     );
   }
