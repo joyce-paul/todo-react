@@ -18,8 +18,8 @@ class App extends React.Component {
   }
 
     changeHandler(event){
-        let newTodo = this.state.todo;
-        newTodo = event.target.value;
+        // let newTodo = this.state.todo;
+        // newTodo = event.target.value;
         this.setState({todo: event.target.value});
         console.log("change handler", event.target.value);
     }
@@ -29,16 +29,15 @@ class App extends React.Component {
         console.log("rendering");
         let todoList = this.state.list.map(stuff => {
             return (
-                <ul>
                     <li>
                     {stuff}
                     </li>
-            </ul>);
+            );
         });
 
         return (
           <div className="list">
-             <input onChange={()=>{this.changeHandler()}} value={this.state.todo}/>
+             <input onChange={(e)=>{this.changeHandler(e)}} value={this.state.todo}/>
              <button onClick={()=>{this.clickHandler()}}>Add an item</button>
              <ul>
              {todoList}
