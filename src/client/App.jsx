@@ -6,31 +6,46 @@ class App extends React.Component {
       super()
 
       this.state = {
-        word : ""
-      }
+        todo : "",
+        list: []
+      };
+    }
+
+    clickHandler(){
+      console.log("clicking");
+      this.state.list.push(this.state.todo);
+      this.setState(this.state.list);
+  }
+
+    changeHandler(event){
+        let newTodo = this.state.todo;
+        newTodo = event.target.value;
+        this.setState({todo: event.target.value});
+        console.log("change handler", event.target.value);
     }
 
 
-clickHandler(){
-  console.log("clicking");
-}
+      render() {
+        console.log("rendering");
+        let todoList = this.state.list.map(stuff => {
+            return (
+                <ul>
+                    <li>
+                    {stuff}
+                    </li>
+            </ul>);
+        });
 
+        return (
+          <div className="list">
+             <input onChange={()=>{this.changeHandler()}} value={this.state.todo}/>
+             <button onClick={()=>{this.clickHandler()}}>Add an item</button>
+             <ul>
+             {todoList}
+             </ul>
+          </div>
+        );
+      }
+    }
 
-changeHandler(event){
-  this.setState({word:event.target.value});
-  console.log("change", event.target.value);
-}
-
-
-  render() {
-    console.log("rendering");
-    return (
-      <div className="item">
-         <input onChange={(event)=>{this.changeHandler(event);}}/>
-         <button onClick={()=>{this.clickHandler()}}>Add an item</button>
-      </div>
-    );
-  }
-}
-
-export default hot(module)(App);
+    export default hot(module)(App);
