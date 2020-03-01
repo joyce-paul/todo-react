@@ -1,6 +1,8 @@
 import React from 'react';
 import { hot } from 'react-hot-loader';
 
+var popups = require("popups");
+
 class App extends React.Component {
     constructor(){
       super()
@@ -12,9 +14,16 @@ class App extends React.Component {
     }
 
     clickHandler(){
-      console.log("clicking");
-      this.state.list.push(this.state.todo);
-      this.setState(this.state.list);
+        if (this.state.todo.length > 1 && this.state.todo.length < 200 ) {
+                 this.state.list.push(this.state.todo);
+                 this.setState(this.state.list);
+                console.log("clicking");
+        } else {
+            popups.alert({
+                content:
+                "more than 1 char and less than 200 chars"
+            });
+        }
   }
 
     changeHandler(event){
@@ -23,7 +32,6 @@ class App extends React.Component {
         this.setState({todo: event.target.value});
         console.log("change handler", event.target.value);
     }
-
 
       render() {
         console.log("rendering");
